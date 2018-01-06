@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Site Manager
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <button ion-button full (click)="getCurrentLocation()">Get Current Location</button>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label floating>Latitude</ion-label>
+            <ion-input type="text" [(ngModel)]="info.latitude" [readonly]="true"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label floating>Longitude</ion-label>
+            <ion-input type="text" [(ngModel)]="info.longitude" [readonly]="true"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <button ion-button full (click)="setFence()" [disabled]="!(info.longitude && info.latitude)">Set Fence</button>
+    <button ion-button full (click)="takePicture()" [disabled]="!(info.longitude && info.latitude)">Take picture</button>
+  </ion-list>
+  <picture-grid [pictures]="pictures" ></picture-grid>
+</ion-content>
