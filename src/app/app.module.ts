@@ -6,25 +6,40 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Geofence } from '@ionic-native/geofence';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera } from '@ionic-native/camera';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { ComponentsModule } from '../components/components.module'
+import { LoginPage } from '../pages/login/login';
+import { ComponentsModule } from '../components/components.module';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyDJO1mE0W6pXKVDZZldc5OTzCPr-Bi6nWo",
+  authDomain: "site-manager-3e365.firebaseapp.com",
+  databaseURL: "https://site-manager-3e365.firebaseio.com",
+  projectId: "site-manager-3e365",
+  storageBucket: "site-manager-3e365.appspot.com",
+  messagingSenderId: "652661960440"
+};
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    LoginPage
   ],
   imports: [
     BrowserModule,
     ComponentsModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    LoginPage
   ],
   providers: [
     StatusBar,
@@ -32,6 +47,7 @@ import { ComponentsModule } from '../components/components.module'
     Geofence,
     Geolocation,
     Camera,
+    AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
