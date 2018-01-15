@@ -54,7 +54,7 @@ export class LoginPage {
   confirmed() {
     this.confirm.confirm(this.code).then(()=> {
       console.log('success');
-      this.navCtrl.push('HomePage');
+      this.navCtrl.setRoot('HomePage');
     })
   }
 

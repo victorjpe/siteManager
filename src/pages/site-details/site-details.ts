@@ -18,6 +18,8 @@ export class SiteDetailsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  info: any = {};
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad SiteDetailsPage');
   }
