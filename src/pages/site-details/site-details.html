@@ -7,12 +7,47 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>site-details</ion-title>
+    <ion-title>Site Details</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item>
+      <ion-label>Vendor Name</ion-label>
+      <ion-select [(ngModel)]="info.vendorName">
+        <ion-option value="brave">Brave Engg</ion-option>
+        <ion-option value="arun">Aruns</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Site Name</ion-label>
+      <ion-input type="text" [(ngModel)]="info.siteName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Site ID</ion-label>
+      <ion-input type="text" [(ngModel)]="info.siteId"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>District</ion-label>
+      <ion-input type="text" [(ngModel)]="info.district"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Type of work</ion-label>
+      <ion-select [(ngModel)]="info.typeOfWork">
+        <ion-option value="dtu">DTU</ion-option>
+        <ion-option value="solar">Solar</ion-option>
+        <ion-option value="tcu">TCU/MCU</ion-option>
+        <ion-option value="ac">AC dismantle</ion-option>
+        <ion-option value="other">Others</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-fab bottom right>
+    <button ion-fab mini>
+      <ion-icon name="save"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>
