@@ -18,8 +18,7 @@
     <ion-item>
       <ion-label>Vendor Name</ion-label>
       <ion-select [(ngModel)]="info.vendorName">
-        <ion-option value="brave">Brave Engg</ion-option>
-        <ion-option value="arun">Aruns</ion-option>
+        <ion-option [value]="vendor" *ngFor="let vendor of vendors">{{ vendor }}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
@@ -37,11 +36,7 @@
     <ion-item>
       <ion-label>Type of work</ion-label>
       <ion-select [(ngModel)]="info.typeOfWork">
-        <ion-option value="dtu">DTU</ion-option>
-        <ion-option value="solar">Solar</ion-option>
-        <ion-option value="tcu">TCU/MCU</ion-option>
-        <ion-option value="ac">AC dismantle</ion-option>
-        <ion-option value="other">Others</ion-option>
+        <ion-option [value]="typeOfWork" *ngFor="let typeOfWork of typeOfWorks">{{ typeOfWork }}</ion-option>
       </ion-select>
     </ion-item>
   </ion-list>

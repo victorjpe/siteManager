@@ -13,6 +13,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { ComponentsModule } from '../components/components.module';
+import { SiteServiceProvider } from '../providers/site-service/site-service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDJO1mE0W6pXKVDZZldc5OTzCPr-Bi6nWo",
@@ -48,7 +49,8 @@ export const firebaseConfig = {
     Geolocation,
     Camera,
     AngularFireDatabase,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    SiteServiceProvider
   ]
 })
 export class AppModule {}

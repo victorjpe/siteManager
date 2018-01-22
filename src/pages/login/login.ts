@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController  } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
-import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 
 /**
  * Generated class for the LoginPage page.
@@ -20,14 +19,11 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private afAuth: AngularFireAuth) {
+    private afAuth: AngularFireAuth, private popOverCtrl: PopoverController  ) {
   }
 
   phoneNumber: string;
   recaptchaVerifier;
-  showPrompt: true;
-  code: string;
-  confirm;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
@@ -42,8 +38,11 @@ export class LoginPage {
     try {
       this.afAuth.auth.signInWithPhoneNumber(this.phoneNumber, this.recaptchaVerifier)
       .then((confirmation) => {
-        this.showPrompt = true;
-        this.confirm = confirmation;
+        const otpPopover = this.popOverCtrl.create('OtpPopoverPage');
+        otpPopover.present();
+        otpPopover.onDidDismiss(otp => {
+          this.confirmed(otp, confirmation);
+        })
       });
     }
     catch (e) {
@@ -51,8 +50,8 @@ export class LoginPage {
     }
   }
 
-  confirmed() {
-    this.confirm.confirm(this.code).then(()=> {
+  confirmed(code, confirmation) {
+    confirmation.confirm(code).then(()=> {
       console.log('success');
       this.navCtrl.setRoot('HomePage');
     })

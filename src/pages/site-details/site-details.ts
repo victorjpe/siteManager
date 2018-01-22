@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { SiteServiceProvider } from '../../providers/site-service/site-service';
+
 /**
  * Generated class for the SiteDetailsPage page.
  *
@@ -15,13 +17,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SiteDetailsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    private siteService: SiteServiceProvider) {
   }
-
+  vendors: string[];
+  typeOfWorks: string[];
   info: any = {};
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SiteDetailsPage');
+    this.siteService.readVendors().valueChanges()
+      .subscribe(result => this.vendors = result);
+    this.siteService.readTypeOfWorks().valueChanges()
+      .subscribe(result => this.typeOfWorks =  result);
   }
 
 }

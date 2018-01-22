@@ -19,10 +19,5 @@
       <ion-input type="tel" [(ngModel)]="phoneNumber"></ion-input>
     </ion-item>
     <button id="sign-in-button" ion-button full (click)="login()">Login</button>
-    <ion-item *ngIf="showPrompt">
-      <ion-label floating>Phone Number</ion-label>
-      <ion-input type="tel" [(ngModel)]="code"></ion-input>
-    </ion-item>
-    <button ion-button full (click)="confirmed()">confirm</button>
   </ion-list>
 </ion-content>
