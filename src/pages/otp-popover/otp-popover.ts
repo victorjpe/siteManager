@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, ViewController } from 'ionic-angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 /**
  * Generated class for the OtpPopoverPage page.
@@ -15,10 +16,13 @@ import { IonicPage, ViewController } from 'ionic-angular';
 })
 export class OtpPopoverPage {
 
-  constructor(private viewCtrl: ViewController) {}
+  constructor(private viewCtrl: ViewController, private formBuilder: FormBuilder) {
+    this.otpForm = formBuilder.group({ otp: ['', Validators.required] });
+  }
   otp: any;
+  otpForm: FormGroup;
 
-  confirm(){
+  confirm() {
     this.viewCtrl.dismiss(this.otp);
   }
 

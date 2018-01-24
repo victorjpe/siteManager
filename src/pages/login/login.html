@@ -13,11 +13,13 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-label floating>Phone Number</ion-label>
-      <ion-input type="tel" [(ngModel)]="phoneNumber"></ion-input>
-    </ion-item>
-    <button id="sign-in-button" ion-button full (click)="login()">Login</button>
-  </ion-list>
+  <form [formGroup]="loginForm" (submit)="login()">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Phone Number</ion-label>
+        <ion-input formControlName="phoneNumber" type="tel" [(ngModel)]="phoneNumber"></ion-input>
+      </ion-item>
+      <button id="sign-in-button" ion-button full>Login</button>
+    </ion-list>
+  </form>
 </ion-content>

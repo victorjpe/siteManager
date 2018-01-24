@@ -14,11 +14,13 @@
 
 
 <ion-content padding>
+  <form [formGroup]="otpForm">
   <ion-list>
     <ion-item>
       <ion-label floating>Please enter the OTP</ion-label>
-      <ion-input type="tel" [(ngModel)]="otp"></ion-input>
+      <ion-input formControlName="otp" type="tel" [(ngModel)]="otp"></ion-input>
     </ion-item>
-    <button ion-button full (click)="confirm()">Confirm</button>
+    <button ion-button full (click)="confirm()" [disabled]="otpForm.invalid">Confirm</button>
   </ion-list>
+</form>
 </ion-content>

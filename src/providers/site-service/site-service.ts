@@ -17,12 +17,20 @@ export class SiteServiceProvider {
     console.log('Hello SiteServiceProvider Provider');
   }
 
-  readVendors(): AngularFireList<string> {
+  readDistricts(): AngularFireList<string> {
     return this.angularfirebaseDB.list('districts');
   }
 
   readTypeOfWorks(): AngularFireList<string> {
     return this.angularfirebaseDB.list('type_of_works');
+  }
+
+  readVendors(): AngularFireList<string> {
+    return this.angularfirebaseDB.list('vendors');
+  }
+
+  saveSiteDetails(){
+   return this.angularfirebaseDB.list('site-details');
   }
 
 }
