@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController,PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, PopoverController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -27,8 +27,6 @@ export class LoginPage {
   recaptchaVerifier;
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-
     this.afAuth.auth.languageCode = 'en';
     this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
       'size': 'invisible'

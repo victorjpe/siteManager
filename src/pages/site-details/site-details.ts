@@ -36,7 +36,6 @@ export class SiteDetailsPage {
   siteDetailsForm: FormGroup;
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SiteDetailsPage');
     this.siteService.readVendors().valueChanges()
       .subscribe(result => this.vendors = result);
     this.siteService.readTypeOfWorks().valueChanges()
@@ -46,7 +45,7 @@ export class SiteDetailsPage {
   }
 
   saveDetails(){
-    this.siteService.saveSiteDetails().push({data: this.info});
+    this.siteService.saveSiteDetails().push(this.info);
   }
 
 }

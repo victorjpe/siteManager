@@ -17,34 +17,34 @@
   <form [formGroup]="siteDetailsForm" (submit)="saveDetails()">
     <ion-list>
       <ion-item>
-        <ion-label floating >Vendor Name</ion-label>
+        <ion-label floating>Vendor Name</ion-label>
         <ion-select formControlName="vendorName" [(ngModel)]="info.vendorName">
           <ion-option [value]="vendor" *ngFor="let vendor of vendors">{{ vendor }}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label floating >Site Name</ion-label>
+        <ion-label floating>Site Name</ion-label>
         <ion-input formControlName="siteName" type="text" [(ngModel)]="info.siteName"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating >Site ID</ion-label>
+        <ion-label floating>Site ID</ion-label>
         <ion-input formControlName="siteId" type="text" [(ngModel)]="info.siteId"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating >District</ion-label>
+        <ion-label floating>District</ion-label>
         <ion-select formControlName="district" [(ngModel)]="info.district">
-            <ion-option [value]="district" *ngFor="let district of districts">{{ district }}</ion-option>
-          </ion-select>
+          <ion-option [value]="district" *ngFor="let district of districts">{{ district }}</ion-option>
+        </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label floating >Type of work</ion-label>
+        <ion-label floating>Type of work</ion-label>
         <ion-select formControlName="typeOfWork" [(ngModel)]="info.typeOfWork">
           <ion-option [value]="typeOfWork" *ngFor="let typeOfWork of typeOfWorks">{{ typeOfWork }}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
+    <ion-fab bottom right>
+      <button ion-fab mini [disabled]="siteDetailsForm.invalid">Save</button>
+    </ion-fab>
   </form>
-  <ion-fab bottom right>
-    <button ion-fab mini [disabled]="siteDetailsForm.invalid">Save</button>
-  </ion-fab>
 </ion-content>
