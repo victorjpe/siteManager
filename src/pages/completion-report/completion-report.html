@@ -15,6 +15,7 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item (click)="takePics()">Take Picture</button>
+    <button ion-item (click)="takePicture()">Take Picture</button>
+    <ion-img [src]="picture" *ngIf="picture"></ion-img>
   </ion-list>
 </ion-content>
