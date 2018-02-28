@@ -45,7 +45,7 @@ export class SiteDetailsPage {
   }
 
   saveDetails(){
-    this.siteService.saveSiteDetails().push(this.info);
+    this.siteService.saveSiteDetails().set(this.info);
   }
 
 }

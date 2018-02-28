@@ -10,19 +10,19 @@
   <ion-list>
     <ion-item>
       <ion-label>Site Details</ion-label>
-      <ion-checkbox [(ngModel)]="siteDetails" (click)="navigate(1)"></ion-checkbox>
+      <ion-checkbox [(ngModel)]="info.siteDetails" (click)="navigate(1)"></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Before Work</ion-label>
-      <ion-checkbox [(ngModel)]="beforeWork"(click)="navigate(2)"></ion-checkbox>
+      <ion-checkbox [(ngModel)]="info.beforeWork"(click)="navigate(2)"></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Personal And Equipment details</ion-label>
-      <ion-checkbox [(ngModel)]="ppe" (click)="navigate(3)"></ion-checkbox>
+      <ion-checkbox [(ngModel)]="info.ppe" (click)="navigate(3)"></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Completion Report</ion-label>
-      <ion-checkbox [(ngModel)]="complete" (click)="navigate(4)"></ion-checkbox>
+      <ion-checkbox [(ngModel)]="info.complete" (click)="navigate(4)"></ion-checkbox>
     </ion-item>
   </ion-list>
 </ion-content>

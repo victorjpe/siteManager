@@ -31,11 +31,19 @@ export class SiteServiceProvider {
   }
 
   saveSiteDetails() {
-    return this.angularfirebaseDB.list('site-details');
+    return this.angularfirebaseDB.object(this.currentUser + '/siteDetails');
   }
 
   readDetails() {
     return this.angularfirebaseDB.list('')
+  }
+
+  readUserSession() {
+    return this.angularfirebaseDB.object(this.currentUser);
+  }
+
+  createUserSession() {
+    return this.angularfirebaseDB.list(this.currentUser);
   }
 
 }
