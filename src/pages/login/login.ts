@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -18,30 +18,22 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginPage {
 
-  constructor(private afAuth: AngularFireAuth, private popOverCtrl: PopoverController,
+  constructor(private afAuth: AngularFireAuth,
     private formBuilder: FormBuilder, public navCtrl: NavController) {
-    this.loginForm = formBuilder.group({ phoneNumber: ['', Validators.required] });
+    this.loginForm = formBuilder.group({ 
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.required]
+     });
   }
   loginForm: FormGroup;
-  phoneNumber: string;
-  recaptchaVerifier;
-
-  ionViewDidLoad() {
-    this.afAuth.auth.languageCode = 'en';
-    this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
-      'size': 'invisible'
-    });
-  }
+  email: string;
+  password: string;
 
   login() {
     try {
-      this.afAuth.auth.signInWithPhoneNumber(this.phoneNumber, this.recaptchaVerifier)
+      this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
         .then((confirmation) => {
-          const otpPopover = this.popOverCtrl.create('OtpPopoverPage');
-          otpPopover.present();
-          otpPopover.onDidDismiss(otp => {
-            this.confirmed(otp, confirmation);
-          })
+          this.navCtrl.setRoot('HomePage');
         });
     }
     catch (e) {
@@ -49,10 +41,7 @@ export class LoginPage {
     }
   }
 
-  confirmed(code, confirmation) {
-    confirmation.confirm(code).then(() => {
-      this.navCtrl.setRoot('HomePage');
-    })
+  register(){
+    this.navCtrl.setRoot('UserRegisterPage');
   }
-
 }

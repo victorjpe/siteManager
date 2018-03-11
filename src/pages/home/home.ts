@@ -14,11 +14,12 @@ export class HomePage {
 
   info: any = {};
 
-  ionViewDidLoad(): void {
-    this.siteService.readUserSession().valueChanges()
-      .subscribe((session) => {
-        this.populateCheckLists(session);
-      });
+  createNewSiteDetails() {
+    this.siteService.createNewSite();
+  }
+
+  retrieveSiteDetails(){
+    // this.siteService.ret
   }
 
   navigate(id: number) {
@@ -31,12 +32,6 @@ export class HomePage {
         break;
       case 4: this.navCtrl.push('CompletionReportPage');
         break;
-    }
-  }
-
-  populateCheckLists(session: any) {
-    if (session.siteDetails) {
-      this.info.siteDetails = true;
     }
   }
 

@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 
 import { SiteServiceProvider } from '../../providers/site-service/site-service';
-import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 
 /**
  * Generated class for the SiteDetailsPage page.

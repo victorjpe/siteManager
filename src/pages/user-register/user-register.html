@@ -1,5 +1,5 @@
 <!--
-  Generated template for the LoginPage page.
+  Generated template for the UserRegisterPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,13 +7,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Login</ion-title>
+    <ion-title>User Registration</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="loginForm" (submit)="login()">
+  <form [formGroup]="registerForm" (submit)="register()">
     <ion-list>
       <ion-item>
         <ion-label floating>Email</ion-label>
@@ -23,8 +23,7 @@
         <ion-label floating>Password</ion-label>
         <ion-input formControlName="password" type="password" [(ngModel)]="password"></ion-input>
       </ion-item>
-      <button ion-button full>Login</button>
-      <button type="button" ion-button full (click)="register()">Register</button>
+      <button ion-button full>Register</button>
     </ion-list>
   </form>
 </ion-content>

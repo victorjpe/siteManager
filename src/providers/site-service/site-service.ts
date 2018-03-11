@@ -15,7 +15,6 @@ export class SiteServiceProvider {
   currentUser: string;
 
   constructor(public angularfirebaseDB: AngularFireDatabase, private afAuth: AngularFireAuth) {
-    this.currentUser = afAuth.auth.currentUser.phoneNumber;
   }
 
   readDistricts(): AngularFireList<string> {
@@ -38,12 +37,14 @@ export class SiteServiceProvider {
     return this.angularfirebaseDB.list('')
   }
 
-  readUserSession() {
+  getSiteDetails() {
     return this.angularfirebaseDB.object(this.currentUser);
   }
 
-  createUserSession() {
-    return this.angularfirebaseDB.list(this.currentUser);
+  createNewSite() {
+    const pushId = this.angularfirebaseDB.createPushId();
+    this.angularfirebaseDB.list(pushId).push('siteDetails')
+    return pushId;
   }
 
 }
