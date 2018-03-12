@@ -19,7 +19,7 @@ export class HomePage {
   }
 
   retrieveSiteDetails(){
-    // this.siteService.ret
+    this.siteService.getPendingSiteDetails();
   }
 
   navigate(id: number) {

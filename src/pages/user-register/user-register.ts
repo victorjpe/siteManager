@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Alert } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -22,7 +22,7 @@ export class UserRegisterPage {
   password: string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private formBuilder: FormBuilder, private afAuth: AngularFireAuth) {
-      this.registerForm = formBuilder.group({ 
+      this.registerForm = formBuilder.group({
         email: ['', Validators.compose([Validators.required, Validators.email])],
         password: ['', Validators.required]
        });
@@ -30,7 +30,8 @@ export class UserRegisterPage {
 
   register() {
     this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password)
-    .then((response) => console.log(response));
+    .then(() => this.navCtrl.popToRoot())
+    .catch(error => console.log(error));
   }
 
 }

@@ -20,7 +20,7 @@ export class LoginPage {
 
   constructor(private afAuth: AngularFireAuth,
     private formBuilder: FormBuilder, public navCtrl: NavController) {
-    this.loginForm = formBuilder.group({ 
+    this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.required]
      });
@@ -42,6 +42,6 @@ export class LoginPage {
   }
 
   register(){
-    this.navCtrl.setRoot('UserRegisterPage');
+    this.navCtrl.push('UserRegisterPage');
   }
 }

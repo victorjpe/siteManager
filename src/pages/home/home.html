@@ -10,10 +10,10 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <button ion-button>Start at a new Site</button>
+        <button ion-button (click)="createNewSiteDetails()">Start New Site</button>
       </ion-col>
       <ion-col>
-        <button ion-button>Continue at last site</button>
+        <button ion-button (click)="retrieveSiteDetails()">Continue at Site</button>
       </ion-col>
     </ion-row>
   </ion-grid>

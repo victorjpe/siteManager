@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
+import 'rxjs/add/operator/take';
 
 /*
   Generated class for the SiteServiceProvider provider.
@@ -15,6 +15,7 @@ export class SiteServiceProvider {
   currentUser: string;
 
   constructor(public angularfirebaseDB: AngularFireDatabase, private afAuth: AngularFireAuth) {
+    this.currentUser = this.afAuth.auth.currentUser.email;
   }
 
   readDistricts(): AngularFireList<string> {
@@ -37,14 +38,12 @@ export class SiteServiceProvider {
     return this.angularfirebaseDB.list('')
   }
 
-  getSiteDetails() {
-    return this.angularfirebaseDB.object(this.currentUser);
+  createNewSite() {
+    this.angularfirebaseDB.list('sites').push({user: this.currentUser, status: "PENDING"});
   }
 
-  createNewSite() {
-    const pushId = this.angularfirebaseDB.createPushId();
-    this.angularfirebaseDB.list(pushId).push('siteDetails')
-    return pushId;
+  getPendingSiteDetails() {
+    return this.angularfirebaseDB.list('sites', ref => ref.orderByChild('user').equalTo(this.currentUser));
   }
 
 }
