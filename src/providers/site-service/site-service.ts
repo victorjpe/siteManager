@@ -14,36 +14,40 @@ export class SiteServiceProvider {
 
   currentUser: string;
 
-  constructor(public angularfirebaseDB: AngularFireDatabase, private afAuth: AngularFireAuth) {
-    this.currentUser = this.afAuth.auth.currentUser.email;
+  constructor(public fireDB: AngularFireDatabase, private afAuth: AngularFireAuth) {
+    this.afAuth.auth.onAuthStateChanged(user => {
+      this.currentUser = user.email;
+    })
   }
 
   readDistricts(): AngularFireList<string> {
-    return this.angularfirebaseDB.list('districts');
+    return this.fireDB.list('districts');
   }
 
   readTypeOfWorks(): AngularFireList<string> {
-    return this.angularfirebaseDB.list('type_of_works');
+    return this.fireDB.list('type_of_works');
   }
 
   readVendors(): AngularFireList<string> {
-    return this.angularfirebaseDB.list('vendors');
+    return this.fireDB.list('vendors');
   }
 
-  saveSiteDetails() {
-    return this.angularfirebaseDB.object(this.currentUser + '/siteDetails');
+  createNewSite(name: string) {
+    const pushId = this.fireDB.createPushId();
+    this.fireDB.list('sites').set(pushId, { id: pushId, user: this.currentUser, siteName: name });
+    return this.fireDB.object('sites/' + pushId);
   }
 
-  readDetails() {
-    return this.angularfirebaseDB.list('')
+  loadExistingSites() {
+    return this.fireDB.list('sites', ref => ref.orderByChild('user').equalTo(this.currentUser));
   }
 
-  createNewSite() {
-    this.angularfirebaseDB.list('sites').push({user: this.currentUser, status: "PENDING"});
+  getSiteReference(key: string) {
+    return this.fireDB.object('sites/' + key);
   }
 
-  getPendingSiteDetails() {
-    return this.angularfirebaseDB.list('sites', ref => ref.orderByChild('user').equalTo(this.currentUser));
+  saveSiteDetails(key: string) {
+    return this.fireDB.object('sites/' + key);
   }
 
 }

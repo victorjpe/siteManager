@@ -22,7 +22,6 @@ export class SiteDetailsPage {
     private siteService: SiteServiceProvider, private formBuilder: FormBuilder) {
       this.siteDetailsForm = formBuilder.group({
         vendorName: ['', Validators.required],
-        siteName: ['', Validators.required],
         siteId: ['', Validators.required],
         district: ['', Validators.required],
         typeOfWork: ['', Validators.required]
@@ -33,6 +32,7 @@ export class SiteDetailsPage {
   typeOfWorks: string[];
   info: any = {};
   siteDetailsForm: FormGroup;
+  siteId: string;
 
   ionViewDidLoad() {
     this.siteService.readVendors().valueChanges()
@@ -43,8 +43,12 @@ export class SiteDetailsPage {
       .subscribe(result => this.districts = result);
   }
 
+  ionViewDidEnter(): void {
+    this.siteId = this.navParams.data;
+  }
+
   saveDetails(){
-    this.siteService.saveSiteDetails().set(this.info);
+    this.siteService.saveSiteDetails(this.siteId).update({siteDetails: this.info});
   }
 
 }
