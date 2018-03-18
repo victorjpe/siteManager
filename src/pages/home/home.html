@@ -7,32 +7,33 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <button ion-button (click)="createNewSiteDetails()">Start New Site</button>
-      </ion-col>
-      <ion-col>
-        <button ion-button (click)="retrieveSiteDetails()">Continue at Site</button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-list *ngIf="site">
-    <ion-item>
+  <ion-segment color="primary">
+    <ion-segment-button (click)="createNewSiteDetails()">
+      Create New Site
+    </ion-segment-button>
+    <ion-segment-button (click)="retrieveSiteDetails()">
+      Continue at Site
+    </ion-segment-button>
+  </ion-segment>
+  <div *ngIf="site">
+    <ion-item (click)="navigate(1)">
+      <ion-icon color="primary" name="checkmark-circle" item-start *ngIf="site.siteDetails;else uncheckedTemplate"></ion-icon>
       <ion-label>Site Details</ion-label>
-      <ion-checkbox [(ngModel)]="site.siteDetails" (click)="navigate(1)"></ion-checkbox>
     </ion-item>
     <ion-item>
+      <ion-icon color="primary" name="checkmark-circle" item-start *ngIf="site.beforeWork;else uncheckedTemplate"></ion-icon>
       <ion-label>Before Work</ion-label>
-      <ion-checkbox [(ngModel)]="site.beforeWork" (click)="navigate(2)"></ion-checkbox>
     </ion-item>
     <ion-item>
+      <ion-icon color="primary" name="checkmark-circle" item-start *ngIf="site.ppe;else uncheckedTemplate"></ion-icon>
       <ion-label>Personal And Equipment details</ion-label>
-      <ion-checkbox [(ngModel)]="site.ppe" (click)="navigate(3)"></ion-checkbox>
     </ion-item>
     <ion-item>
+      <ion-icon color="primary" name="checkmark-circle" item-start *ngIf="site.complete;else uncheckedTemplate"></ion-icon>
       <ion-label>Completion Report</ion-label>
-      <ion-checkbox [(ngModel)]="site.complete" (click)="navigate(4)"></ion-checkbox>
     </ion-item>
-  </ion-list>
+  </div>
+  <ng-template #uncheckedTemplate>
+    <ion-icon color="primary" name="checkmark-circle-outline" item-start></ion-icon>
+  </ng-template>
 </ion-content>

@@ -14,6 +14,7 @@ import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { ComponentsModule } from '../components/components.module';
 import { SiteServiceProvider } from '../providers/site-service/site-service';
+import { UploadServiceProvider } from '../providers/upload-service/upload-service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDJO1mE0W6pXKVDZZldc5OTzCPr-Bi6nWo",
@@ -50,7 +51,8 @@ export const firebaseConfig = {
     Camera,
     AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    SiteServiceProvider
+    SiteServiceProvider,
+    UploadServiceProvider
   ]
 })
 export class AppModule {}

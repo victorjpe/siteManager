@@ -45,6 +45,8 @@ export class SiteDetailsPage {
 
   ionViewDidEnter(): void {
     this.siteId = this.navParams.data;
+    this.siteService.getSiteDetails(this.siteId).valueChanges()
+    .subscribe(siteDetails => this.info = siteDetails);
   }
 
   saveDetails(){

@@ -50,4 +50,12 @@ export class SiteServiceProvider {
     return this.fireDB.object('sites/' + key);
   }
 
+  getSiteDetails(key : string){
+    return this.fireDB.object(`sites/${key}/siteDetails`);
+  }
+
+  getBeforeWorkPhotos(key: string) {
+    return this.fireDB.list(`sites/${key}/beforeWork`);
+  }
+
 }
