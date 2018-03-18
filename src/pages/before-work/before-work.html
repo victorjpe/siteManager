@@ -16,10 +16,15 @@
 <ion-content padding class="card-background-page">
   <ion-list>
     <button ion-item text-center color="primary" (click)="takePicture()" [disabled]="this.pictures.length >= 2">Take Picture</button>
-    
+
     <ion-card *ngFor="let picture of pictures" [hidden]="!picture.url">
-      <img [src]="picture.url"/>
+      <img [src]="picture.url" />
       <div class="card-title">{{ picture.name }}</div>
     </ion-card>
   </ion-list>
+  <ion-fab bottom right>
+    <button ion-fab mini (click)="goBack()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

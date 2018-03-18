@@ -38,9 +38,7 @@ export class BeforeWorkPage {
   ionViewDidEnter(): void {
     this.siteId = this.navParams.data;
     this.siteService.getBeforeWorkPhotos(this.siteId).valueChanges()
-    .subscribe((photos: FileUpload[]) =>{
-      console.log('values',photos);
-      this.pictures = photos || []})
+      .subscribe((photos: FileUpload[]) => this.pictures = photos || []);
   }
 
   takePicture() {
@@ -57,6 +55,10 @@ export class BeforeWorkPage {
       .take(1).subscribe(() => {
         loading.dismiss();
       });
+  }
+
+  goBack(): void {
+    this.navCtrl.pop();
   }
 
 }

@@ -50,7 +50,8 @@ export class SiteDetailsPage {
   }
 
   saveDetails(){
-    this.siteService.saveSiteDetails(this.siteId).update({siteDetails: this.info});
+    this.siteService.saveSiteDetails(this.siteId)
+    .update({siteDetails: this.info}).then(() => this.navCtrl.pop());
   }
 
 }

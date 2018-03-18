@@ -58,4 +58,12 @@ export class SiteServiceProvider {
     return this.fireDB.list(`sites/${key}/beforeWork`);
   }
 
+  getPPEPhotos(key: string) {
+    return this.fireDB.list(`sites/${key}/ppe`);
+  }
+
+  getCompletePhotos(key: string) {
+    return this.fireDB.list(`sites/${key}/complete`);
+  }
+
 }
