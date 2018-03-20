@@ -46,11 +46,11 @@ export class SiteDetailsPage {
   ionViewDidEnter(): void {
     this.siteId = this.navParams.data;
     this.siteService.getSiteDetails(this.siteId).valueChanges()
-    .subscribe(siteDetails => this.info = siteDetails);
+    .subscribe(siteDetails => this.info = siteDetails || {});
   }
 
   saveDetails(){
-    this.siteService.saveSiteDetails(this.siteId)
+    this.siteService.getSiteReference(this.siteId)
     .update({siteDetails: this.info}).then(() => this.navCtrl.pop());
   }
 

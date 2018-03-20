@@ -35,7 +35,6 @@ export class SiteServiceProvider {
   createNewSite(name: string) {
     const pushId = this.fireDB.createPushId();
     this.fireDB.list('sites').set(pushId, { id: pushId, user: this.currentUser, siteName: name });
-    return this.fireDB.object('sites/' + pushId);
   }
 
   loadExistingSites() {
@@ -43,10 +42,6 @@ export class SiteServiceProvider {
   }
 
   getSiteReference(key: string) {
-    return this.fireDB.object('sites/' + key);
-  }
-
-  saveSiteDetails(key: string) {
     return this.fireDB.object('sites/' + key);
   }
 

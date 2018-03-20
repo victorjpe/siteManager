@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
 
-import { PictureGridComponent } from './picture-grid/picture-grid';
+import { SiteListComponent } from './site-list/site-list';
 @NgModule({
-	declarations: [PictureGridComponent],
-	imports: [ IonicModule ],
-	exports: [PictureGridComponent]
+  declarations: [
+    SiteListComponent
+  ],
+  imports: [IonicModule],
+  exports: [
+    SiteListComponent
+  ]
 })
-export class ComponentsModule {}
+export class ComponentsModule { }

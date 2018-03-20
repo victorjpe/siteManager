@@ -1,1 +1,11 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-nav #appmenu [root]="rootPage"></ion-nav>
+<ion-menu [content]="appmenu">
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-icon name="log-out" item-end></ion-icon>
+        Logout
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
