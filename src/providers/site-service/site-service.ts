@@ -15,9 +15,9 @@ export class SiteServiceProvider {
   currentUser: string;
 
   constructor(public fireDB: AngularFireDatabase, private afAuth: AngularFireAuth) {
-    this.afAuth.auth.onAuthStateChanged(user => {
+    this.afAuth.authState.subscribe(user => {
       this.currentUser = user.email;
-    })
+    });
   }
 
   readDistricts(): AngularFireList<string> {
