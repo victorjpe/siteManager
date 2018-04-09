@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { SiteServiceProvider } from '../../providers/site-service/site-service';
 
@@ -18,14 +18,17 @@ import { SiteServiceProvider } from '../../providers/site-service/site-service';
 })
 export class SiteDetailsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private siteService: SiteServiceProvider, private formBuilder: FormBuilder) {
-      this.siteDetailsForm = formBuilder.group({
-        vendorName: ['', Validators.required],
-        siteId: ['', Validators.required],
-        district: ['', Validators.required],
-        typeOfWork: ['', Validators.required]
-      });
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private siteService: SiteServiceProvider,
+    formBuilder: FormBuilder) {
+    this.siteDetailsForm = formBuilder.group({
+      vendorName: ['', Validators.required],
+      siteId: ['', Validators.required],
+      district: ['', Validators.required],
+      typeOfWork: ['', Validators.required]
+    });
   }
   districts: string[];
   vendors: string[];
@@ -38,7 +41,7 @@ export class SiteDetailsPage {
     this.siteService.readVendors().valueChanges()
       .subscribe(result => this.vendors = result);
     this.siteService.readTypeOfWorks().valueChanges()
-      .subscribe(result => this.typeOfWorks =  result);
+      .subscribe(result => this.typeOfWorks = result);
     this.siteService.readDistricts().valueChanges()
       .subscribe(result => this.districts = result);
   }
@@ -46,12 +49,12 @@ export class SiteDetailsPage {
   ionViewDidEnter(): void {
     this.siteId = this.navParams.data;
     this.siteService.getSiteDetails(this.siteId).valueChanges()
-    .subscribe(siteDetails => this.info = siteDetails || {});
+      .subscribe(siteDetails => this.info = siteDetails || {});
   }
 
-  saveDetails(){
+  saveDetails() {
     this.siteService.getSiteReference(this.siteId)
-    .update({siteDetails: this.info}).then(() => this.navCtrl.pop());
+      .update({ siteDetails: this.info }).then(() => this.navCtrl.pop());
   }
 
 }
