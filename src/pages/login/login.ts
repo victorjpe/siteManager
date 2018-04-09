@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 /**
@@ -19,7 +18,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class LoginPage {
 
   constructor(private afAuth: AngularFireAuth,
-    private formBuilder: FormBuilder, public navCtrl: NavController) {
+    formBuilder: FormBuilder, public navCtrl: NavController) {
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.required]
