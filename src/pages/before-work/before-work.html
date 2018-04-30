@@ -19,7 +19,7 @@
 
     <ion-card *ngFor="let picture of pictures" [hidden]="!picture.url">
       <img [src]="picture.url" />
-      <div class="card-title">{{ picture.name }}</div>
+      <ion-icon class="card-delete" name="trash" (click)="delete"></ion-icon>
     </ion-card>
   </ion-list>
   <ion-fab bottom right>

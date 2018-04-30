@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { UploadServiceProvider } from '../../providers/upload-service/upload-service';
-import { FileUpload } from '../../providers/upload-service/file-upload';
+import { FileUpload } from '../../providers/model/file-upload';
 import { SiteServiceProvider } from '../../providers/site-service/site-service';
 
 /**
@@ -44,7 +44,7 @@ export class CompletionReportPage {
   takePicture() {
     this.camera.getPicture(this.options).then((imageData) => {
       this.save(new FileUpload(imageData, `${this.siteId}_Complete${this.pictures.length + 1}.jpg`));
-    }, (err) => console.log(err));
+    });
   }
 
   save(picture: FileUpload) {

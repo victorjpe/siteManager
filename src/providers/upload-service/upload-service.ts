@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import * as firebase from 'firebase';
-
-import { FileUpload } from './file-upload';
 import { Observable } from 'rxjs/Observable';
+
+import { FileUpload } from '../model/file-upload';
+import { Picture } from '../model/picture';
 
 /*
  Generated class for the UploadServiceProvider provider.
@@ -27,7 +28,7 @@ export class UploadServiceProvider {
         .putString(fileUpload.file, 'base64', { contentType: 'image/jpg' });
 
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
-        (snapshot) => {      
+        (snapshot) => {
         },
         (error) => {
           // fail
@@ -37,8 +38,10 @@ export class UploadServiceProvider {
         },
         () => {
           // success
-          fileUpload.url = uploadTask.snapshot.downloadURL;
-          this.saveFileData(fileUpload, reference);
+          const picture = new Picture();
+          picture.name = fileUpload.name;
+          picture.url = uploadTask.snapshot.downloadURL;
+          this.saveFileData(picture, reference);
           observe.next();
           observe.complete();
         }
@@ -55,20 +58,19 @@ export class UploadServiceProvider {
     return this.fileUploads
   }
 
-  // deleteFileUpload(fileUpload: FileUpload) {
-  //   this.deleteFileDatabase(fileUpload.$key)
-  //     .then(() => {
-  //       this.deleteFileStorage(fileUpload.name)
-  //     })
-  //     .catch(error => console.log(error))
-  // }
+  deleteFileUpload(fileUpload: FileUpload) {
+    this.deleteFileDatabase(fileUpload.name)
+      .then(() => {
+        this.deleteFileStorage(fileUpload.name)
+      });
+  }
 
-  // private deleteFileDatabase(key: string) {
-  //   return this.db.list(`${this.basePath}/`).remove(key)
-  // }
+  private deleteFileDatabase(key: string) {
+    return this.db.list(`${this.basePath}/`).remove(key)
+  }
 
-  // private deleteFileStorage(name: string) {
-  //   const storageRef = firebase.storage().ref()
-  //   storageRef.child(`${this.basePath}/${name}`).delete()
-  // }
+  private deleteFileStorage(name: string) {
+    const storageRef = firebase.storage().ref()
+    storageRef.child(`${this.basePath}/${name}`).delete()
+  }
 }

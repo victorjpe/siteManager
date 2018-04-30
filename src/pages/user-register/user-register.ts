@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -24,7 +24,8 @@ export class UserRegisterPage {
     formBuilder: FormBuilder,
     private afAuth: AngularFireAuth,
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    private toastCtrl: ToastController
   ) {
     this.registerForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -35,7 +36,15 @@ export class UserRegisterPage {
   register() {
     this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password)
       .then(() => this.navCtrl.popToRoot())
-      .catch(error => console.log(error));
+      .catch(error => {
+        let toast = this.toastCtrl.create({
+          message: error.message,
+          showCloseButton: true,
+          position: 'middle',
+          closeButtonText: 'OK'
+        });
+        toast.present();
+      });
   }
 
 }

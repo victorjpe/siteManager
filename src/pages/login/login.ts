@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -17,30 +17,38 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginPage {
 
-  constructor(private afAuth: AngularFireAuth,
-    formBuilder: FormBuilder, public navCtrl: NavController) {
+  constructor(
+    public navCtrl: NavController,
+    formBuilder: FormBuilder,
+    private afAuth: AngularFireAuth,
+    private toastCtrl: ToastController
+  ) {
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.required]
-     });
+    });
   }
   loginForm: FormGroup;
   email: string;
   password: string;
 
   login() {
-    try {
-      this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
-        .then((confirmation) => {
-          this.navCtrl.setRoot('HomePage');
+    this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
+      .then((confirmation) => {
+        this.navCtrl.setRoot('HomePage');
+      })
+      .catch(error => {
+        let toast = this.toastCtrl.create({
+          message: error.message,
+          showCloseButton: true,
+          position: 'middle',
+          closeButtonText: 'OK'
         });
-    }
-    catch (e) {
-      console.error(e);
-    }
+        toast.present();
+      });
   }
 
-  register(){
+  register() {
     this.navCtrl.push('UserRegisterPage');
   }
 }
