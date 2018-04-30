@@ -1,19 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { LoginPage } from '../pages/login/login';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
-  rootPage:any = LoginPage;
+export class MyApp implements OnInit, OnDestroy {
+
+  rootPage: any = LoginPage;
+  authSubject: Subject<boolean>;
 
 
-  constructor(private platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private afAuth: AngularFireAuth) {
+  constructor(
+    private afAuth: AngularFireAuth,
+    platform: Platform,
+    splashScreen: SplashScreen,
+    statusBar: StatusBar
+  ) {
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -23,9 +31,21 @@ export class MyApp {
     });
   }
 
-  logout(){
+  ngOnInit(): void {
+    this.authSubject =  new Subject();
+    this.afAuth.authState.takeUntil(this.authSubject).subscribe(user => {
+      sessionStorage.setItem('user', user.email);
+    });
+  }
+
+  logout() {
     this.afAuth.auth.signOut();
-    this.platform.exitApp();
+    sessionStorage.removeItem('user');
+  }
+
+  ngOnDestroy(): void {
+    this.authSubject.next();
+    this.authSubject.complete();
   }
 }
 

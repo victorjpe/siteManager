@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
 import 'rxjs/add/operator/take';
 
 /*
@@ -14,10 +13,8 @@ export class SiteServiceProvider {
 
   currentUser: string;
 
-  constructor(public fireDB: AngularFireDatabase, private afAuth: AngularFireAuth) {
-    this.afAuth.authState.subscribe(user => {
-      this.currentUser = user.email;
-    });
+  constructor(public fireDB: AngularFireDatabase) {
+
   }
 
   readDistricts(): AngularFireList<string> {
@@ -30,15 +27,6 @@ export class SiteServiceProvider {
 
   readVendors(): AngularFireList<string> {
     return this.fireDB.list('vendors');
-  }
-
-  createNewSite(name: string) {
-    const pushId = this.fireDB.createPushId();
-    this.fireDB.list('sites').set(pushId, { id: pushId, user: this.currentUser, siteName: name });
-  }
-
-  loadExistingSites() {
-    return this.fireDB.list('sites', ref => ref.orderByChild('user').equalTo(this.currentUser));
   }
 
   getSiteReference(key: string) {

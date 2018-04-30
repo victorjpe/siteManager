@@ -1,6 +1,6 @@
 <!-- Generated template for the SiteListComponent component -->
 <ion-list>
-  <ion-item *ngFor="let site of sites" (click)="loadSite(site.id)">
+  <ion-item *ngFor="let site of sites | async" (click)="loadSite(site.id)">
     <h2>{{ site.siteName}}</h2>
     <ion-icon name="arrow-forward" item-right></ion-icon>
   </ion-item>

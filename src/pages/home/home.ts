@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage, AlertController } from 'ionic-angular';
+import { IonicPage, AlertController } from 'ionic-angular';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
-import { SiteServiceProvider } from '../../providers/site-service/site-service';
+import { Site } from '../../providers/model/site';
 
 @IonicPage()
 @Component({
@@ -10,12 +12,17 @@ import { SiteServiceProvider } from '../../providers/site-service/site-service';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, private siteService: SiteServiceProvider,
-    private alertCtrl: AlertController) { }
+  constructor(
+    private alertCtrl: AlertController,
+    private fireDB: AngularFireDatabase
+  ) { }
 
-  sites: any[] = [];
+  sites: Observable<any[]>;
+  currentUser: string;
+
   ionViewWillEnter(): void {
-    this.siteService.loadExistingSites().valueChanges().subscribe((sites) => this.sites = sites);
+    this.currentUser = sessionStorage.getItem('user');
+    this.sites = this.fireDB.list<Site[]>('sites', ref => ref.orderByChild('user').equalTo(this.currentUser)).valueChanges();
   }
 
   create() {
@@ -36,13 +43,18 @@ export class HomePage {
           text: 'Create',
           handler: data => {
             if (data.siteName) {
-              this.siteService.createNewSite(data.siteName);
+              this.createNewSite(data.siteName);
             }
           }
         }
       ]
     });
     alertPopup.present();
+  }
+
+  createNewSite(name: string) {
+    const pushId = this.fireDB.createPushId();
+    this.fireDB.list('sites').set(pushId, { id: pushId, user: this.currentUser, siteName: name });
   }
 
 }
