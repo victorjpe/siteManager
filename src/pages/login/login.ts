@@ -36,6 +36,7 @@ export class LoginPage {
     this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
       .then((confirmation) => {
         this.navCtrl.setRoot('HomePage');
+        sessionStorage.setItem('user', this.email);
       })
       .catch(error => {
         let toast = this.toastCtrl.create({

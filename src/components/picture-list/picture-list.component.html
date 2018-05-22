@@ -1,0 +1,5 @@
+<button ion-item text-center color="primary" (click)="takePicture()" [disabled]="this.pictures.length >= noOfImages">Take Picture</button>
+<ion-card *ngFor="let picture of pictures" [hidden]="!picture.url">
+  <img [src]="picture.url" />
+  <ion-icon class="card-delete" name="trash" (click)="delete(picture)"></ion-icon>
+</ion-card>

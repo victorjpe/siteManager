@@ -50,26 +50,22 @@ export class UploadServiceProvider {
   }
 
   private saveFileData(fileUpload: FileUpload, reference: string) {
-    this.db.list(`sites/${reference}/`).push(fileUpload)
+    const pushId = this.db.createPushId();
+    this.db.list(`sites/${reference}`).set(pushId, { key: pushId, ...fileUpload })
   }
 
-  getFileUploads(query = {}) {
-    this.fileUploads = this.db.list(this.basePath);
-    return this.fileUploads
+  deletePicture(path: string, fileUpload: FileUpload) {
+    console.log(path);
+    this.deleteFromDatabase(path, fileUpload.key).then(() => {
+      this.deleteFromStorage(fileUpload.name);
+    });
   }
 
-  deleteFileUpload(fileUpload: FileUpload) {
-    this.deleteFileDatabase(fileUpload.name)
-      .then(() => {
-        this.deleteFileStorage(fileUpload.name)
-      });
+  private deleteFromDatabase(path: string, key: string) {
+    return this.db.list(`sites/${path}`).remove(key);
   }
 
-  private deleteFileDatabase(key: string) {
-    return this.db.list(`${this.basePath}/`).remove(key)
-  }
-
-  private deleteFileStorage(name: string) {
+  private deleteFromStorage(name: string) {
     const storageRef = firebase.storage().ref()
     storageRef.child(`${this.basePath}/${name}`).delete()
   }
