@@ -53,6 +53,6 @@ export class PictureListComponent {
   }
 
   delete(picture: FileUpload): void {
-    this.uploadService.deletePicture(`${this.siteId}/beforeWork/`,picture);
+    this.uploadService.deletePicture(`${this.siteId}/${this.page}/`,picture);
   }
 }

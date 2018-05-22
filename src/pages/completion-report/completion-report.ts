@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { FileUpload } from '../../providers/model/file-upload';
 import { SiteServiceProvider } from '../../providers/site-service/site-service';
