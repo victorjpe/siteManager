@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Geolocation } from '@ionic-native/geolocation';
 
 import { SiteServiceProvider } from '../../providers/site-service/site-service';
 
@@ -19,10 +20,12 @@ import { SiteServiceProvider } from '../../providers/site-service/site-service';
 export class SiteDetailsPage {
 
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
+    formBuilder: FormBuilder,
+    private geolocation: Geolocation,
     private siteService: SiteServiceProvider,
-    formBuilder: FormBuilder) {
+    public navCtrl: NavController,
+    public navParams: NavParams
+  ) {
     this.siteDetailsForm = formBuilder.group({
       vendorName: ['', Validators.required],
       siteId: ['', Validators.required],
@@ -44,6 +47,10 @@ export class SiteDetailsPage {
       .subscribe(result => this.typeOfWorks = result);
     this.siteService.readDistricts().valueChanges()
       .subscribe(result => this.districts = result);
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.info.latitude = resp.coords.latitude;
+      this.info.longitude = resp.coords.longitude;
+    })
   }
 
   ionViewDidEnter(): void {

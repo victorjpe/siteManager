@@ -17,8 +17,8 @@ export class MyApp implements OnInit, OnDestroy {
 
 
   constructor(
-    private afAuth: AngularFireAuth,
     platform: Platform,
+    private afAuth: AngularFireAuth,
     splashScreen: SplashScreen,
     statusBar: StatusBar
   ) {
