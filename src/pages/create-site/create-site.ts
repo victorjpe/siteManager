@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
 import { SiteServiceProvider } from '../../providers/site-service/site-service';
-import { Site } from '../../providers/model/site';
+import { Site, Location } from '../../providers/model/site';
 import { User } from '../../providers/model/user';
 
 /**
@@ -24,9 +24,10 @@ export class CreateSitePage {
   createSiteForm: FormGroup;
   districts: string[];
   vendors: string[];
-  info: Site = { createdUser: sessionStorage.getItem('user') };
+  info: Site = { createdUser: sessionStorage.getItem('user')};
   typeOfWorks: string[];
   workers: Observable<User[]>;
+  saveLocation: boolean;
 
   constructor(
     formBuilder: FormBuilder,
@@ -39,6 +40,8 @@ export class CreateSitePage {
       siteId: ['', Validators.required],
       district: ['', Validators.required],
       typeOfWork: ['', Validators.required],
+      latitude: [''],
+      longitude: [''],
       assignee: ['', Validators.required]
     });
   }
@@ -60,6 +63,14 @@ export class CreateSitePage {
 
   dismiss(): void {
     this.viewCtrl.dismiss();
+  }
+
+  initLocation(): void {
+    if (this.saveLocation) {
+      this.info.location = new Location(this.info.siteName);
+    } else {
+      this.info.location = undefined;
+    }
   }
 
 }

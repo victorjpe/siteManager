@@ -43,6 +43,20 @@
         </ion-select>
       </ion-item>
       <ion-item>
+        <ion-label>Save Location</ion-label>
+        <ion-toggle [(ngModel)]="saveLocation" (ionChange)="initLocation()" [ngModelOptions]="{standalone: true}"></ion-toggle>
+      </ion-item>
+      <ng-container *ngIf="saveLocation">
+        <ion-item>
+          <ion-label floating>Latitude</ion-label>
+          <ion-input formControlName="latitude" type="text" [(ngModel)]="info.location.latitude"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Longitude</ion-label>
+          <ion-input formControlName="longitude" type="text" [(ngModel)]="info.location.longitude"></ion-input>
+        </ion-item>
+      </ng-container>
+      <ion-item>
         <ion-label floating>Assignee</ion-label>
         <ion-select formControlName="assignee" [(ngModel)]="info.assignee">
           <ion-option [value]="worker.email" *ngFor="let worker of workers | async">{{ worker.email }}</ion-option>

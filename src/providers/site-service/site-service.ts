@@ -43,8 +43,8 @@ export class SiteServiceProvider {
     return this.fireDB.object('sites/' + key);
   }
 
-  getSiteDetails(key: string) {
-    return this.fireDB.object(`sites/${key}/siteDetails`);
+  getSiteLocation(key: string) {
+    return this.fireDB.object(`sites/${key}/location`);
   }
 
   getBeforeWorkPhotos(key: string) {

@@ -30,7 +30,7 @@ export class SitePage {
 
   navigate(id: number) {
     switch (id) {
-      case 1: this.navCtrl.push('SiteDetailsPage', this.siteId);
+      case 1: this.navCtrl.push('SiteLocationPage', this.siteId);
         break;
       case 2: this.navCtrl.push('BeforeWorkPage', this.siteId);
         break;

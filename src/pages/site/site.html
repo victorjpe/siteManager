@@ -16,7 +16,7 @@
   <ion-list *ngIf="site">
     <ion-item (click)="navigate(1)">
       <ion-icon color="primary" name="checkmark-circle" item-start *ngIf="site.siteDetails;else uncheckedTemplate"></ion-icon>
-      <ion-label>Site Details</ion-label>
+      <ion-label>Location</ion-label>
     </ion-item>
     <ion-item (click)="navigate(2)">
       <ion-icon color="primary" name="checkmark-circle" item-start *ngIf="site.beforeWork;else uncheckedTemplate"></ion-icon>
