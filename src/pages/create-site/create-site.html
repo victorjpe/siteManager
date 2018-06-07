@@ -49,11 +49,11 @@
       <ng-container *ngIf="saveLocation">
         <ion-item>
           <ion-label floating>Latitude</ion-label>
-          <ion-input formControlName="latitude" type="text" [(ngModel)]="info.location.latitude"></ion-input>
+          <ion-input formControlName="latitude" type="number" [(ngModel)]="info.location.latitude"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating>Longitude</ion-label>
-          <ion-input formControlName="longitude" type="text" [(ngModel)]="info.location.longitude"></ion-input>
+          <ion-input formControlName="longitude" type="number" [(ngModel)]="info.location.longitude"></ion-input>
         </ion-item>
       </ng-container>
       <ion-item>
