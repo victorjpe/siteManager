@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 /**
  * Generated class for the LoginPage page.
@@ -18,10 +19,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class LoginPage {
 
   constructor(
-    public navCtrl: NavController,
     formBuilder: FormBuilder,
     private afAuth: AngularFireAuth,
-    private toastCtrl: ToastController
+    private fireDB: AngularFireDatabase,
+    private toastCtrl: ToastController,
+    public navCtrl: NavController
   ) {
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -52,4 +54,5 @@ export class LoginPage {
   register() {
     this.navCtrl.push('UserRegisterPage');
   }
+
 }

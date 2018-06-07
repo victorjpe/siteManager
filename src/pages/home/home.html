@@ -11,7 +11,7 @@
 
 <ion-content padding>
   <site-list [sites]="sites"></site-list>
-  <ion-fab bottom right>
+  <ion-fab bottom right *ngIf="userAdmin">
     <button ion-fab mini (click)="create()">
       <ion-icon name="add"></ion-icon>
     </button>

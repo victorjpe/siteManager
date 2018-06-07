@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import 'rxjs/add/operator/take';
 
+import { User } from '../model/user';
+import { Site } from '../model/site';
+
 /*
   Generated class for the SiteServiceProvider provider.
 
@@ -13,9 +16,7 @@ export class SiteServiceProvider {
 
   currentUser: string;
 
-  constructor(public fireDB: AngularFireDatabase) {
-
-  }
+  constructor(public fireDB: AngularFireDatabase) { }
 
   readDistricts(): AngularFireList<string> {
     return this.fireDB.list('districts');
@@ -29,11 +30,20 @@ export class SiteServiceProvider {
     return this.fireDB.list('vendors');
   }
 
+  readWorkers(): AngularFireList<User> {
+    return this.fireDB.list('users', ref => ref.orderByChild('roles/worker').equalTo(true));
+  }
+
+  createNewSite(site: Site): void {
+    const pushId = this.fireDB.createPushId();
+    this.fireDB.list('sites').set(pushId, { id: pushId, ...site });
+  }
+
   getSiteReference(key: string) {
     return this.fireDB.object('sites/' + key);
   }
 
-  getSiteDetails(key : string){
+  getSiteDetails(key: string) {
     return this.fireDB.object(`sites/${key}/siteDetails`);
   }
 
